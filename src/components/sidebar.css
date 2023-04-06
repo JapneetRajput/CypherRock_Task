@@ -1,0 +1,18 @@
+a:hover {
+  background-color: #374151;
+}
+
+.divider {
+  height: 1px;
+  background-color: #1E2328;
+  margin: 4px 2px 4px 2px;
+}
+
+.sub-link {
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  padding-left: 16px;
+}

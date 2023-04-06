@@ -1,0 +1,17 @@
+.divider-top {
+  height: 1px;
+  background-color: #1e2328;
+  margin: 20px 40px 10px 40px;
+}
+.divider-vertical {
+  border-right: 1px solid #403d3a;
+  height: 20px;
+  width: 1px;
+}
+tr {
+  display: table-row;
+  margin-bottom: 10px;
+}
+table {
+  border-spacing: 150px;
+}
