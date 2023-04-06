@@ -7,9 +7,12 @@ const Subheader = () => {
   const handleToggle = () => {
     setToggle(!toggle);
   };
+
   return (
-    <div className="flex items-center justify-between px-4 py-3 pr-12">
-      <div className="flex items-center"></div>
+    <div className="flex flex-col md:flex-row items-center justify-between px-4 py-3 pr-12">
+      <div className="flex items-center mb-3 md:mb-0">
+        {/* Add any content you want to display on the left */}
+      </div>
       <div className="flex items-center">
         <img src={yellowTick} alt="icon 1" className="w-6 h-6 mr-3" />
         <span className="text-[#F5CEA3] mr-4 text-lg">Synchronized</span>

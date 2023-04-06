@@ -90,12 +90,11 @@ const Home: React.FC = () => {
           <p>Modal content goes here.</p>
         </div> */}
       {/* </Modal> */}
-      <div className="flex items-center justify-between px-4 py-3 pr-8 pl-80">
-        <div className="flex items-center">
+      <div className="flex flex-col items-center justify-between px-4 py-3 md:flex-row md:pr-8 md:pl-80">
+        <div className="flex items-center mb-2 md:mb-0">
           <h1 className="text-[#E2C19D] ml-2 text-2xl font-medium">Wallet 1</h1>
         </div>
         <div className="flex items-center">
-          {/* <img src={yellowTick} alt="icon 1" className="w-6 h-6 mr-3" /> */}
           <div className="bg-[#141921] rounded-md p-2 flex items-center mr-4">
             <img src={searchIcon} alt="Search" className="pl-1 pr-3" />
             <input
@@ -104,8 +103,8 @@ const Home: React.FC = () => {
               className="bg-transparent focus:outline-none w-full"
             />
           </div>
-          <div className="bg-[#141921] rounded-md px-2 py-2 flex items-center mr-4">
-            <button>
+          <div className="bg-[#141921] rounded-md px-2 py-2 flex items-center">
+            <button className="mr-4">
               <img
                 src={plusIcon}
                 alt="Search"
@@ -127,6 +126,7 @@ const Home: React.FC = () => {
           </div>
         </div>
       </div>
+
       {/* Total coins  */}
       <div className="flex items-center justify-between px-4 py-3 pr-8 pl-80">
         <div className="flex items-center">
