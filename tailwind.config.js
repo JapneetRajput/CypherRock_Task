@@ -5,7 +5,12 @@ module.exports = {
     fontFamily: {
       lato: ["Lato", "sans-serif"],
     },
-    extend: {},
+    extend: {
+      colors: {
+        transparent: "rgba(255, 255, 255, 0.04)",
+        transparent6: "rgba(255, 255, 255, 0.15)",
+      },
+    },
   },
   plugins: [],
 };

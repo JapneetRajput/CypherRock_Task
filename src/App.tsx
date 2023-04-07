@@ -1,12 +1,12 @@
-import "./App.css";
+import React, { useState } from "react";
+import CheckpointMarker from "./components/CheckpointMarker";
 import Home from "./components/Home";
 
-function App() {
+const App: React.FC = () => {
+
   return (
-    <div className="App">
-      <Home/>
-    </div>
+    <Home/>
   );
-}
+};
 
 export default App;

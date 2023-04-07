@@ -13,7 +13,9 @@ import sendIcon from "../assets/svgs/sendIcon.svg";
 import bitcoin from "../assets/svgs/bitcoin.svg";
 import ethereum from "../assets/svgs/ethereum.svg";
 import binance from "../assets/svgs/binance.svg";
+import rightArrow from "../assets/svgs/rightArrow.svg";
 import Modal from "./Modal";
+import CheckpointMarker from "./CheckpointMarker";
 
 const Home: React.FC = () => {
   const data = [
@@ -72,11 +74,26 @@ const Home: React.FC = () => {
     return () => document.removeEventListener("click", handleClickOutside);
   }, [dropdownRef]);
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const toggleModal = () => {
-    setIsModalOpen((prevIsModalOpen) => !prevIsModalOpen);
+  const handleOpenModal = () => {
+    setIsOpen(true);
   };
+
+  const handleCloseModal = () => {
+    setIsOpen(false);
+  };
+  const [currentStep, setCurrentStep] = useState(0);
+
+  const handleNextStep = () => {
+    setCurrentStep((prevStep) => prevStep + 1);
+  };
+
+  const handlePrevStep = () => {
+    setCurrentStep((prevStep) => prevStep - 1);
+  };
+
+  const steps = ["Device", "Verification", "Receive"];
 
   return (
     <div className="bg-[#0A1018] w-full ">
@@ -84,12 +101,167 @@ const Home: React.FC = () => {
       <div className="divider-top"></div>
       <Subheader />
 
-      <Modal isOpen={isModalOpen} toggle={toggleModal} />
-      {/* <div className="p-4">
-          <h2 className="text-xl font-bold mb-4">Modal Title</h2>
-          <p>Modal content goes here.</p>
-        </div> */}
-      {/* </Modal> */}
+      <Modal isOpen={isOpen} onClose={handleCloseModal}>
+        <div className="flex flex-col justify-center items-center">
+          <h2 className="text-2xl  my-4 text-white">Receive</h2>
+
+          <div className="flex flex-col items-center mt-10">
+            <CheckpointMarker steps={steps} currentStep={currentStep} />
+            <div className="mt-5 ml-2">
+              {steps.map((step, index) => {
+                return (
+                  <p
+                    className={`inline-block px-20 ${
+                      index < currentStep
+                        ? "text-[#C78D4E]"
+                        : index === currentStep
+                        ? "text-[#E19A4C]"
+                        : "text-[#A2A1A1]"
+                    }`}
+                  >
+                    {step}
+                  </p>
+                );
+              })}
+              <br />
+              {currentStep === 0 && (
+                // <button
+                //   className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+                //   onClick={handleNextStep}
+                // >
+                //   Next
+                // </button>
+                <>
+                  <p className="text-[#7E7D7D] text-md ml-4 mt-16">
+                    Follow the instructions on device
+                  </p>
+                  <div
+                    className="bg-transparent my-4 pt-3 pb-3 px-3 rounded-lg overflow-hidden shadow-md"
+                    onClick={handleNextStep}
+                  >
+                    <img
+                      className="inline-block object-cover w-4 h-3 mr-3 ml-2 mb-1"
+                      src={rightArrow}
+                      alt="Card"
+                    />
+                    <span className="text-md text-[#A4A9D6]">
+                      Select the Wallet On device
+                    </span>
+                    {/* <img
+                        className="inline-block object-cover w-4 h-3 mr-2 relative top-0 right-0  mb-1 "
+                        src={rightArrow}
+                        alt="Card"
+                      /> */}
+                  </div>
+                  <div className="bg-transparent my-4 pt-3 pb-3 px-3 rounded-lg overflow-hidden shadow-md">
+                    <img
+                      className="inline-block object-cover w-4 h-3 mr-3 ml-2 mb-1"
+                      src={rightArrow}
+                      alt="Card"
+                    />
+                    <span className="text-md text-[#A4A9D6]">
+                      Select the Coin on device
+                    </span>
+                    {/* <img
+                        className="inline-block object-cover w-4 h-3 mr-2 relative top-0 right-0  mb-1 "
+                        src={rightArrow}
+                        alt="Card"
+                      /> */}
+                  </div>
+                  <div className="bg-transparent my-4 pt-3 pb-3 px-3 rounded-lg overflow-hidden shadow-md">
+                    <img
+                      className="inline-block object-cover w-4 h-3 mr-3 ml-2 mb-1"
+                      src={rightArrow}
+                      alt="Card"
+                    />
+                    <span className="text-md text-[#A4A9D6]">
+                      Tap 1 card of any 4 Cards
+                    </span>
+                    {/* <img
+                        className="inline-block object-cover w-4 h-3 mr-2 relative top-0 right-0  mb-1 "
+                        src={rightArrow}
+                        alt="Card"
+                      /> */}
+                  </div>
+                </>
+              )}
+              {currentStep === 1 && (
+                // <button
+                //   className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+                //   onClick={handleNextStep}
+                // >
+                //   Next
+                // </button>
+                <>
+                  <div
+                    className="bg-transparent my-4 py-8 px-3 rounded-lg overflow-hidden shadow-md flex items-center"
+                    onClick={handlePrevStep}
+                  >
+                    <span className="text-2xl font-bold text-[#E19A4C] mx-auto">
+                      25BKJNKNLJL58fjkdhfk26dnfds15
+                    </span>
+                  </div>
+
+                  <p className="text-[#7E7D7D] text-md ml-4 mt-8">
+                    Verify address on device
+                  </p>
+                  <div
+                    className="bg-transparent my-4 pt-3 pb-3 px-3 rounded-lg overflow-hidden shadow-md"
+                    onClick={handleNextStep}
+                  >
+                    <img
+                      className="inline-block object-cover w-4 h-3 mr-3 ml-2 mb-1"
+                      src={rightArrow}
+                      alt="Card"
+                    />
+                    <span className="text-md text-[#A4A9D6]">
+                      Please match the address to be shown in X1 Wallet
+                    </span>
+                    {/* <img
+                      className="inline-block object-cover w-4 h-3 mr-2 relative top-0 right-0  mb-1 "
+                      src={rightArrow}
+                      alt="Card"
+                    /> */}
+                  </div>
+                </>
+              )}
+              {currentStep === 2 && (
+                <>
+                  <p className="text-[#7E7D7D] text-lg ml-4 mt-8">
+                    Coin address
+                  </p>
+                  <div
+                    className="bg-transparent my-4 py-4 px-3 rounded-lg overflow-hidden shadow-md flex items-center"
+                    onClick={handlePrevStep}
+                  >
+                    <span className="text-2xl font-bold text-[#E19A4C] mx-auto">
+                      25BKJNKNLJL58fjkdhfk26dnfds15
+                    </span>
+                    <div
+                      className="bg-transparent6 cursor:pointer py-3 px-3 mr-6 rounded-xl overflow-hidden shadow-md flex items-center"
+                      onClick={handlePrevStep}
+                    >
+                      <span className="text-xl text-[#E0B36A] mx-auto">
+                        Copy
+                      </span>
+                    </div>
+                  </div>
+                  <p className="text-[#4848F6] text-lg ml-4 mt-8">
+                    Address verified
+                  </p>
+                  <button
+                    className="hover:bg-[#4848F6] hover:text-white text-[#4848F6] py-2 px-4 mt-10  mx-[300px] rounded-md"
+                    style={{ borderColor: "#4848F6", borderWidth: "1px" }}
+                  >
+                    Re-Verify
+                  </button>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+      </Modal>
+
       <div className="flex flex-col items-center justify-between px-4 py-3 md:flex-row md:pr-8 md:pl-80">
         <div className="flex items-center mb-2 md:mb-0">
           <h1 className="text-[#E2C19D] ml-2 text-2xl font-medium">Wallet 1</h1>
@@ -110,7 +282,10 @@ const Home: React.FC = () => {
                 alt="Search"
                 className="pl-1 pr-1 pb-1 my-0 inline w-5 h-5"
               />
-              <span onClick={toggleModal} className="text-[#BEB4A8] text-md">
+              <span
+                onClick={handleOpenModal}
+                className="text-[#BEB4A8] text-md"
+              >
                 ADD COIN
               </span>
             </button>

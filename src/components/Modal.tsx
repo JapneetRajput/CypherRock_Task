@@ -1,38 +1,28 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import crossIcon from "../assets/svgs/crossIcon.svg";
 
-interface ModalProps {
+type ModalProps = {
   isOpen: boolean;
-  toggle: () => void;
-}
+  onClose: () => void;
+  children: React.ReactNode;
+};
 
-const Modal: React.FC<ModalProps> = ({ isOpen, toggle }) => {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(isOpen);
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    toggle();
+const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
+  const handleClose = () => {
+    onClose();
   };
 
-  return (
-    <>
-      {isModalOpen && (
-        <div className="fixed z-10 inset-0 overflow-y-auto">
-          <div className="flex items-center justify-center min-h-screen">
-            <div className="fixed inset-0 bg-gray-500 bg-opacity-75"></div>
+  if (!isOpen) return null;
 
-            <div className="relative bg-white rounded-md max-w-md w-full p-6">
-              <button
-                onClick={handleCloseModal}
-                className="absolute top-0 right-0 p-2 rounded-full bg-gray-200 hover:bg-gray-300 focus:outline-none"
-              >
-                <img src={crossIcon} alt="icon 3" className="w-4 h-4" />
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-    </>
+  return (
+    <div className="fixed top-0 left-0 w-full h-full  bg-opacity-50 flex justify-center items-center z-50">
+      <div className="relative bg-[#13161A] rounded-lg shadow-lg p-8 w-full h-5/6 mx-48 my-96">
+        <button className="absolute top-4 right-8 p-10" onClick={handleClose}>
+          <img src={crossIcon} alt="close" className="w-4 h-4" />
+        </button>
+        {children}
+      </div>
+    </div>
   );
 };
 
